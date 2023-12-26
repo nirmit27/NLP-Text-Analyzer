@@ -1,4 +1,4 @@
-""" Testing out the server ... """
+""" DATABASE Management - CRUD Operations """
 
 from mongo import Database
 
@@ -27,6 +27,11 @@ class DB:
         return True if is_valid else False
 
 
+# ----------------------------------------------- D R I V E R ----------------------------------------------- #
+
 if __name__ == "__main__":
 
+    # Instantiating the DB class ...
     db = DB()
+
+# ----------------------------------------------------------------------------------------------------------- #

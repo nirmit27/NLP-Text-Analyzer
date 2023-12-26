@@ -11,7 +11,7 @@ class Database:
 
     def __init__(self):
         cfg = cfgp.ConfigParser()
-        cfg.read('altsettings.cfg')
+        cfg.read('connectsettings.cfg')
         connectionString = cfg.get('MDB', 'connectionString')
         self.client = MongoClient(connectionString)
         self.available_dbs = self.client.list_database_names()
@@ -169,16 +169,21 @@ class Database:
         self.client.close()
 
 
+# ----------------------------------------------- D R I V E R ----------------------------------------------- #
+
 if __name__ == "__main__":
 
     database = Database()
 
+    # Checking if everything is OK ...
     database.show_dbs()
 
     #  C R U D  Operations ...
 
     # database.find()
     # database.insert(n=1)
-    database.conditional_find()
+    # database.conditional_find()
 
     database.close_connection()
+
+# ----------------------------------------------------------------------------------------------------------- #

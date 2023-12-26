@@ -360,6 +360,12 @@ class NLPApp:
         for i in self.root.pack_slaves():
             i.destroy()
 
+# ----------------------------------------------- D R I V E R ----------------------------------------------- #
 
-# Creating the instance of the GUI class ...
-nlp = NLPApp()
+
+if __name__ == "__main__":
+
+    # Creating the instance of the GUI class ...
+    nlp = NLPApp()
+
+# ----------------------------------------------------------------------------------------------------------- #
