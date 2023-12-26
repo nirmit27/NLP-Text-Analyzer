@@ -1,7 +1,7 @@
 """ MongoDB Connectivity """
 
 from pprint import pprint
-import configparser as cfgp
+import configparser
 from pymongo import MongoClient
 
 
@@ -10,7 +10,7 @@ class Database:
     # Establishing connection ...
 
     def __init__(self):
-        cfg = cfgp.ConfigParser()
+        cfg = configparser.ConfigParser()
         cfg.read('config/connectsettings.cfg')
         connectionString = cfg.get('MDB', 'connectionString')
         self.client = MongoClient(connectionString)
@@ -60,7 +60,7 @@ class Database:
 
     def insert(self, n=1, name='', email='', pwd=''):
         collection = self.fetch('nlpApp', 'creds')
-        if collection != None:
+        if collection is not None:
             if n < 0:
                 print(f"\nNumber of documents must be >= 1\n")
                 return
@@ -77,7 +77,8 @@ class Database:
                             "pwd": pwd
                         }
                     }
-                    id = collection.insert_one(new_user)
+                    insert_id = collection.insert_one(new_user)
+                    pprint(insert_id)
                 elif n > 1:
                     docs = []
                     n = int(
@@ -101,7 +102,7 @@ class Database:
 
     def find(self):
         collection = self.fetch()
-        if collection != None:
+        if collection is not None:
             result = {}
             field = input("\nEnter the query field : ")
             ch = input("\nIs the value numeric? (y/n)  >>  ")
@@ -109,7 +110,7 @@ class Database:
                         ) if ch == 'y' else input("\nEnter the query value : ")
             doc_to_find = {field: value}
             result = collection.find_one(doc_to_find)
-            if result != None:
+            if result is not None:
                 print("\nQuery ran successfully! Result ...\n")
                 pprint(result)
             else:
@@ -119,7 +120,7 @@ class Database:
 
     def alt_find(self, field='', ch='', value='', dic={}):
         collection = self.fetch(db_name='nlpApp', collection_name='creds')
-        if collection != None:
+        if collection is not None:
             doc_to_find, result = {}, {}
             if field == '' and ch == '' and value == '' and len(dic) == 0:
                 field = input("\nEnter the query field : ")
@@ -130,7 +131,7 @@ class Database:
                 result = collection.find_one(doc_to_find)
             elif len(dic) != 0:
                 result = collection.find_one(dic)
-            if result != None:
+            if result is not None:
                 return True
             else:
                 return False
@@ -141,7 +142,7 @@ class Database:
 
     def conditional_find(self):
         collection = self.fetch()
-        if collection != None:
+        if collection is not None:
             field = input("\nEnter the query field : ")
             ch = input("\nIs the value numeric? (y/n)  >>  ")
             value = int(input("\nEnter the query value : ")
@@ -149,7 +150,7 @@ class Database:
             condition = input("\nEnter the conditional query operator : ")
             doc_to_find = {field: {f"${condition}": value}}
             cursor = collection.find(doc_to_find)
-            if cursor != None:
+            if cursor is not None:
                 n = 0
                 print("\nQuery ran successfully! Results ...\n")
                 for doc in cursor:
