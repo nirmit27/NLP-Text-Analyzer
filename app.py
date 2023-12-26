@@ -3,7 +3,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
-from mydb import Database as myDb
+from mydb2 import Database as myDb
 from myapi import MyAPI as myApi
 
 
@@ -119,8 +119,11 @@ class NLPApp:
     # Logic for L O G G I N G  I N ...
 
     def login(self):
-        email = self.email_input.get()
-        pwd = self.pwd_input.get()
+        email = ''
+        pwd = ''
+        if self.email_input != None and self.pwd_input != None:
+            email = self.email_input.get()
+            pwd = self.pwd_input.get()
 
         logged = myDb()
         response = logged.search(email=email, pwd=pwd)
@@ -132,9 +135,11 @@ class NLPApp:
     # Logic for R E G I S T R A T I O N ...
 
     def registration(self):
-        name = self.name_input.get()
-        email = self.email_input.get()
-        pwd = self.pwd_input.get()
+        name, email, pwd = '', '', ''
+        if self.email_input != None and self.pwd_input != None and self.name_input != None:
+            name = self.name_input.get()
+            email = self.email_input.get()
+            pwd = self.pwd_input.get()
 
         register = myDb()
         response = register.add_data(name=name, email=email, pwd=pwd)
@@ -226,21 +231,22 @@ class NLPApp:
                            font=('Arial', 9, 'bold'))
 
     def senti_analysis(self):
-        self.sentiment_result['text'] = ''
+        if self.sentiment_result != None and self.sentiment_input != None:
+            self.sentiment_result['text'] = ''
 
-        text = self.sentiment_input.get('1.0', tk.END)
-        req = self.apio.sentiment(text=text)
+            text = self.sentiment_input.get('1.0', tk.END)
+            req = self.apio.sentiment(text=text)
 
-        res = ''
-        for i in req['sentiment']:
-            if i == 'negative':
-                res += i.title() + '  :\t' + \
-                    f"{round(req['sentiment'][i]*100,2)} %\n"
-            else:
-                res += i.title() + '\t  :\t' + \
-                    f"{round(req['sentiment'][i]*100,2)} %\n"
+            res = ''
+            for i in req['sentiment']:
+                if i == 'negative':
+                    res += i.title() + '  :\t' + \
+                        f"{round(req['sentiment'][i]*100,2)} %\n"
+                else:
+                    res += i.title() + '\t  :\t' + \
+                        f"{round(req['sentiment'][i]*100,2)} %\n"
 
-        self.sentiment_result['text'] = res
+            self.sentiment_result['text'] = res
 
     def ner_gui(self):
         self.clear()
@@ -281,16 +287,17 @@ class NLPApp:
                            font=('Arial', 9, 'bold'))
 
     def ner(self):
-        self.ner_result.delete('1.0', tk.END)
+        if self.ner_result != None and self.ner_input != None:
+            self.ner_result.delete('1.0', tk.END)
 
-        text = self.ner_input.get('1.0', tk.END)
-        req = self.apio.ner(text=text)
+            text = self.ner_input.get('1.0', tk.END)
+            req = self.apio.ner(text=text)
 
-        res = ''
-        for i in req['entities']:
-            res += f"{i['name']} is a {i['category']}.\n"
+            res = ''
+            for i in req['entities']:
+                res += f"{i['name']} is a {i['category']}.\n"
 
-        self.ner_result.insert("1.0", res)
+            self.ner_result.insert("1.0", res)
 
     def intent_gui(self):
         self.clear()
@@ -332,21 +339,22 @@ class NLPApp:
                            font=('Arial', 9, 'bold'))
 
     def intent(self):
-        self.int_result['text'] = ''
+        if self.int_result != None and self.int_input != None:
+            self.int_result['text'] = ''
 
-        text = self.int_input.get('1.0', tk.END)
-        req = self.apio.intentc(text=text).json()["intent"]
+            text = self.int_input.get('1.0', tk.END)
+            req = self.apio.intentc(text=text).json()["intent"]
 
-        res = ''
-        for i, j in req.items():
-            if i in ['query', 'spam']:
-                res += i.title() + '\t    :\t' + f'{round(j*100,2)}%\n'
-            elif i == 'marketing':
-                res += i.title() + '   :\t' + f'{round(j*100,2)}%\n'
-            else:
-                res += i.title() + '   :\t' + f'{round(j*100,2)}%\n'
+            res = ''
+            for i, j in req.items():
+                if i in ['query', 'spam']:
+                    res += i.title() + '\t    :\t' + f'{round(j*100,2)}%\n'
+                elif i == 'marketing':
+                    res += i.title() + '   :\t' + f'{round(j*100,2)}%\n'
+                else:
+                    res += i.title() + '   :\t' + f'{round(j*100,2)}%\n'
 
-        self.int_result['text'] = res
+            self.int_result['text'] = res
 
     def clear(self):
         for i in self.root.pack_slaves():

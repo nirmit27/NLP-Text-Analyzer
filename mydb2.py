@@ -1,34 +1,32 @@
-""" MongoDB Connectivity """
+""" Testing out the server ... """
 
-import configparser as cfgp
-from pymongo import MongoClient
-
-
-def listAll(client):
-    dbs = client.list_database_names()
-
-    print("Available databases :\n")
-    for db in dbs:
-        print(db, end='\t')
+from mongo import Database
 
 
-def insertion(client):
+class DB:
 
-    pass
+    def __init__(self):
+        self.db = Database()
+
+    # Registration
+
+    def add_creds(self, name, email, pwd):
+        uniq_pwd = self.db.alt_find(field='creds.pwd', ch='n', value=pwd)
+        uniq_email = self.db.alt_find(field='email', ch='n', value=email)
+
+        if uniq_pwd and uniq_email:
+            self.db.insert(name=name, email=email, pwd=pwd)
+            return [1, uniq_pwd]
+
+        return [0, uniq_pwd]
+
+    # Login
+
+    def search_creds(self, email, pwd):
+        is_valid = self.db.alt_find(dic={"email": email, "creds.pwd": pwd})
+        return True if is_valid else False
 
 
 if __name__ == "__main__":
 
-    # Fetching the connection string from the CONFIG file ...
-    cfg = cfgp.ConfigParser()
-    cfg.read('settings.cfg')
-    connectionString = cfg.get('MDB', 'connectionString')
-
-    # Establishing the connection ...
-    client = MongoClient(connectionString)
-
-    # insertion(client)
-    listAll(client)
-
-    # Closing the connection ...
-    client.close()
+    db = DB()
