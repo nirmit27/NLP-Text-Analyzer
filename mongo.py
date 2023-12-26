@@ -11,7 +11,7 @@ class Database:
 
     def __init__(self):
         cfg = cfgp.ConfigParser()
-        cfg.read('connectsettings.cfg')
+        cfg.read('config/connectsettings.cfg')
         connectionString = cfg.get('MDB', 'connectionString')
         self.client = MongoClient(connectionString)
         self.available_dbs = self.client.list_database_names()

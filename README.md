@@ -1,6 +1,6 @@
 <div align="center" >
   <h1>NLP Text Analyzer</h1> 
-  <p>An API-based NLP application created using <b>tkinter</b> and <b>OOP</b> in <b>Python</b>.</p>
+  <p>An API-based NLP application created using <b>tkinter</b> and <b>OOP</b> in <b>Python</b> that uses <b>MongoDB</b> for user login and registration.</p>
 </div>
   
 <br>

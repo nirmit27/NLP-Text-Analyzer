@@ -12,7 +12,7 @@ class MyAPI:
     def __init__(self):
 
         cfg = cfgp.ConfigParser()
-        cfg.read('settings.cfg')
+        cfg.read('config/settings.cfg')
         self.api_key = cfg.get('PD', 'api_key')
 
         pds.set_api_key(apikey=self.api_key)
