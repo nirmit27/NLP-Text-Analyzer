@@ -3,7 +3,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
-from mydb2 import Database as myDb
+from mydb2 import DB as myDb
 from myapi import MyAPI as myApi
 
 
@@ -126,7 +126,7 @@ class NLPApp:
             pwd = self.pwd_input.get()
 
         logged = myDb()
-        response = logged.search(email=email, pwd=pwd)
+        response = logged.search_creds(email=email, pwd=pwd)
         if response:
             self.home_gui()
         else:
@@ -142,7 +142,7 @@ class NLPApp:
             pwd = self.pwd_input.get()
 
         register = myDb()
-        response = register.add_data(name=name, email=email, pwd=pwd)
+        response = register.add_creds(name=name, email=email, pwd=pwd)
         if response[0] == 0:
             match response[1]:
                 case True:

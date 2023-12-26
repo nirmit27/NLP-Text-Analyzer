@@ -11,7 +11,7 @@ class Database:
 
     def __init__(self):
         cfg = cfgp.ConfigParser()
-        cfg.read('settings.cfg')
+        cfg.read('altsettings.cfg')
         connectionString = cfg.get('MDB', 'connectionString')
         self.client = MongoClient(connectionString)
         self.available_dbs = self.client.list_database_names()
@@ -61,7 +61,6 @@ class Database:
     def insert(self, n=1, name='', email='', pwd=''):
         collection = self.fetch('nlpApp', 'creds')
         if collection != None:
-            # n = int(input("\nNumber of documents to be inserted : "))
             if n < 0:
                 print(f"\nNumber of documents must be >= 1\n")
                 return
@@ -79,7 +78,6 @@ class Database:
                         }
                     }
                     id = collection.insert_one(new_user)
-                    print(f"\nID of inserted documents : {id}")
                 elif n > 1:
                     docs = []
                     n = int(
@@ -96,9 +94,6 @@ class Database:
                                 "pwd": pwd
                             }
                         })
-                    # result = collection.insert_many(docs)
-                    # print()
-                    # pprint(result)
         else:
             print("\nInsertion operation F A I L E D.\n")
 
@@ -136,14 +131,10 @@ class Database:
             elif len(dic) != 0:
                 result = collection.find_one(dic)
             if result != None:
-                # print("\nQuery ran successfully! Result ...\n")
-                # pprint(result)
                 return True
             else:
-                # print("\nNo such documents exist!\n")
                 return False
         else:
-            # print("\nFailed Query operation!\n")
             return False
 
     # for MULTIPLE conditional matches ...
