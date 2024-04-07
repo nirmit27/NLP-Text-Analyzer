@@ -13,10 +13,10 @@
 <br>
 
 <div align="center" >
-  <h2>Screenshots</h2>
-  <img src="resources/sa.png" height="400" width="250" alt="sa" style="margin: 20px 10px">
-  <img src="resources/ner.png" height="400" width="250" alt="ner" style="margin: 20px 10px">
-  <img src="resources/int.png" height="400" width="250" alt="int" style="margin: 20px 10px">
+  <h2>Preview</h2>
+  <img src="resources/sa.png" alt="sa" style="margin: 20px 10px">
+  <img src="resources/ner.png" alt="ner" style="margin: 20px 10px">
+  <img src="resources/int.png" alt="int" style="margin: 20px 10px">
 </div>
 
 <br>
