@@ -7,7 +7,7 @@
 
 <div align="center" >
   <h2>Workflow</h2>
-  <img src="resources/workflow.png" height="500" width="490" alt="sa" style="margin: 20px 10px">
+  <img src="resources/workflow.png" alt="sa" style="margin: 20px 10px">
 </div>
 
 <br>
