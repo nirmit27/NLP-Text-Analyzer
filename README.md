@@ -1,6 +1,6 @@
 <div align="center" >
   <h1>NLP Text Analyzer</h1> 
-  <p>An API-based NLP <b>GUI</b> created using <b>tkinter</b> and <b>OOP</b> in Python.</p>
+  <p>An API-based NLP <b>GUI</b> created using <b>tkinter</b> in Python.</p>
 </div>
   
 <br>
