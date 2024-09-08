@@ -7,8 +7,12 @@
 
 <div align="center" >
   <h2>Workflow</h2>
+<!--
   <img src="resources/workflow.png" alt="sa" style="margin: 20px 10px">
+-->
 </div>
+
+![Workflow](resources/workflow.png)
 
 <br>
 
