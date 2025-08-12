@@ -1,4 +1,4 @@
-""" DATABASE Management - CRUD Operations """
+"""DATABASE Management - CRUD Operations"""
 
 from mongo import Database
 
@@ -11,8 +11,8 @@ class DB:
     # Registration
 
     def add_creds(self, name, email, pwd):
-        uniq_pwd = self.db.alt_find(field='creds.pwd', ch='n', value=pwd)
-        uniq_email = self.db.alt_find(field='email', ch='n', value=email)
+        uniq_pwd = self.db.alt_find(field="creds.pwd", ch="n", value=pwd)
+        uniq_email = self.db.alt_find(field="email", ch="n", value=email)
 
         if uniq_pwd and uniq_email:
             self.db.insert(name=name, email=email, pwd=pwd)
@@ -27,11 +27,6 @@ class DB:
         return True if is_valid else False
 
 
-# ----------------------------------------------- D R I V E R ----------------------------------------------- #
-
+# Driver
 if __name__ == "__main__":
-
-    # Instantiating the DB class ...
     db = DB()
-
-# ----------------------------------------------------------------------------------------------------------- #
